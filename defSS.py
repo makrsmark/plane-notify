@@ -109,7 +109,7 @@ def get_adsbx_screenshot(file_path, url_params, enable_labels=False, enable_trac
         element = browser.find_element(By.ID, "selected_ownop")
         browser.execute_script(f"arguments[0].innerText = '* {overrides['ownop']}'", element)
     time.sleep(5)
-    browser.save_screenshot(file_path)
+    browser.get_screenshot_as_file(file_path)
     browser.quit()
 def generate_adsbx_screenshot_time_params(timestamp):
     from datetime import datetime
