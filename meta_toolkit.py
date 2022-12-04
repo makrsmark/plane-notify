@@ -1,5 +1,4 @@
 import requests
-import json
 def post_fb(page_id, file_path, message, access_token):
     """Posts to Facebook with Image"""
     import os
@@ -30,8 +29,8 @@ def post_to_instagram(ig_user_id, access_token, image_url, caption):
     }
     resp = requests.post(post_url, data=payload)
     resp.raise_for_status()
-    print("IG Media Response:", resp.json())
-    result = json.loads(resp.text)
+    result = resp.json()
+    print("IG Media Response:", result)
     if 'id' in result:
         creation_id = result['id']
         second_url = f'https://graph.facebook.com/v13.0/{ig_user_id}/media_publish'

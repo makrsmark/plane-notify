@@ -1,4 +1,3 @@
-import json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -82,8 +81,10 @@ def get_adsbx_screenshot(file_path, url_params, enable_labels=False, enable_trac
             except NoSuchElementException:
                 photo_box = browser.find_element(By.ID, "airplanePhoto")
             finally:
-                import requests, json
-                photo_list = json.loads(requests.get("https://raw.githubusercontent.com/Jxck-S/aircraft-photos/main/photo-list.json", timeout=20).text)
+                import requests
+                response = requests.get("https://raw.githubusercontent.com/Jxck-S/aircraft-photos/main/photo-list.json", timeout=20)
+                response.raise_for_status()
+                photo_list = response.json()
                 if reg in photo_list.keys():
                     browser.execute_script("arguments[0].id = 'airplanePhoto';", photo_box)
                     browser.execute_script("arguments[0].removeAttribute('width')", photo_box)

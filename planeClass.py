@@ -651,13 +651,14 @@ class Plane:
                         from geopy.distance import geodesic
                         from shapely.geometry.polygon import Polygon
                         from shapely.geometry import Point
-                        import requests, json
+                        import requests
                         closest_tfr = None
                         in_tfr = None
                         if Plane.main_config.getboolean("TFRS", "ENABLE"):
                             tfr_url = Plane.main_config.get("TFRS", "URL")
                             response = requests.get(tfr_url, timeout=60)
-                            tfrs = json.loads(response.text)
+                            response.raise_for_status()
+                            tfrs = response.json()
                             for tfr in tfrs:
                                 if in_tfr is not None:
                                     break
