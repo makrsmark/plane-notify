@@ -194,7 +194,7 @@ try:
             data_indexed = {}
             failed = False
             for icao in planes:
-                planeInfo = pull_rpdadsbx(icao)
+                plane_info = pull_rpdadsbx(icao)
                 plane = planes[icao]
                 if plane_info:
                     if plane_info['ac']:
