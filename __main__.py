@@ -196,9 +196,9 @@ try:
             for icao in planes:
                 planeInfo = pull_rpdadsbx(icao)
                 plane = planes[icao]
-                if planeInfo is not None:
-                    data_indexed[icao.upper()] = planeInfo['ac'] 
-                    if data_indexed[icao.upper()]:
+                if plane_info:
+                    if plane_info['ac']:
+                        data_indexed[icao.upper()] = plane_info['ac'][0]
                         plane.run_adsbx_v2(data_indexed[icao.upper()])
                     else: 
                         plane.run_empty()
